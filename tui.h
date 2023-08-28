@@ -20,7 +20,7 @@
 # define TUI_KEY_SPACE 32
 # define TUI_KEY_ENTER 10
 
-typedef struct tools_s
+typedef struct window_s
 {
     void *background_color;
     void *foreground_color;
@@ -29,7 +29,8 @@ typedef struct tools_s
     int terminal_center_col;
     int terminal_center_row;
     void *page;
-} tools_t;
+    void *buffer;
+} window_t;
 
 typedef struct page_s
 {
@@ -53,10 +54,12 @@ enum colors_e
 };
 
 
-void get_terminal_size(tools_t *);
-void set_tui_background_color(int, void *);
-void set_tui_foreground_color(int, void *);
-void *new_page();
+void get_terminal_size(window_t *);
+void set_background_color(int, void *);
+void set_foreground_color(int, void *);
+int create_blank_screen(window_t *);
+void *new_page(int, int);
+window_t *create_tui(void);
 
 
 #endif
